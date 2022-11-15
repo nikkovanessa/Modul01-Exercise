@@ -65,21 +65,78 @@ function count (data) {
 console.log(count(studentDbs));
 
 // No. 2
-// class Product {
-//     constructor (name, price) {
-//         this.name = name
-//         this.price = price
-//     }
-// }
-
-// class Transaction {
-//     total = 0
-//     allProducts = []
-//     addCart(product, qty) {
-//         this.allProducts.push(product)
-//         for (let i in this.allProducts) {
-//             if (this.allProducts[i].qty === undefined) {
-//                 this.allProducts[i].qty = qty
-//             }
-//         }
-//     }
+class Product {
+    constructor(name, price, qty) {
+      this.name = name
+      this.price = price
+      this.qty = qty
+    }
+  }
+  
+  class Transaction {
+    total = 0
+    boughtProduct = []
+  
+    cartList (productList) {
+      this.boughtProduct.push(productList);
+    }
+  
+    cartView () {
+      let myCart = `MY CART\n\n`;
+      for (let i = 0; i < this.boughtProduct.length; i++) {
+        myCart += `Product: ${this.boughtProduct[i].name}\nQuantity: ${this.boughtProduct[i].qty}\nPrice / qty: ${this.boughtProduct[i].price}\n`
+        myCart += `\n`
+      }
+      console.log(myCart);
+    }
+  
+    checkout () {
+      let myCheckout = `CHECK OUT\n\nTotal transaction:\n`
+      for (let i = 0; i < this.boughtProduct.length; i++) {
+        myCheckout += `${this.boughtProduct[i].name}: ${
+        this.boughtProduct[i].qty * this.boughtProduct[i].price
+        }\n`
+        this.total += this.boughtProduct[i].qty * this.boughtProduct[i].price;
+      }
+      myCheckout += `Total Price: ${this.total}\n\n`;
+  
+      console.log(myCheckout);
+    }
+  
+    payment(money) {
+      let pay = `PAYMENT\n\n`
+      if (money > this.total) {
+        pay += `Transaction Succesful\nTotal Price: ${
+          this.total
+        }\nMoney: ${money}\nChange: ${money - this.total}`;
+      } else if (money < this.total) {
+        pay += `Transaction Canceled\nTotal Price: ${this.total}\nMoney: ${money}\nMoney is not enough`
+      } else {
+        pay += `Transaction Succesful\nTotal Price: ${this.total}\nMoney: ${money}`
+      }
+      console.log(pay);
+    }
+  }
+  
+  // Product List
+  const products = [
+    new Product("Jacket", 100000, 5),
+    new Product("Hoodie", 150000, 7),
+    new Product("Sweater", 120000, 8),
+  ]
+  
+  let transaction = new Transaction();
+  
+  // Input Product
+  transaction.cartList(products[0]);
+  transaction.cartList(products[1]);
+  transaction.cartList(products[2]);
+  
+  // Show Cart List
+  transaction.cartView();
+  
+  // Show Total Transaction
+  transaction.checkout();
+  
+  // Input money
+  transaction.payment(3000000);
