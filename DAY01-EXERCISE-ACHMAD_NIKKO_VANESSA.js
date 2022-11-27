@@ -1,39 +1,51 @@
-// No. 1
-let length = 3 , breadth = 4 
-let areaRectangle = length * breadth
-    console.log(`No. 1
-    Length : ${length} Breadth : ${breadth}, Area of Rectangle : ${areaRectangle}`)
-// No. 2
-let perimeter = 2 * (length + breadth)
-    console.log(`No. 2
-    Length : ${length}, Breadth : ${breadth}, Perimeter of Rectangle : ${perimeter}`)
+// No. 1 Area of Rectangle
+let areaRectangle = (length, breadth) => {
+    return length * breadth;
+}
 
-// No. 3
-let r = 5
-let diameter = 2 * r
-let circumferences = Math.PI * diameter
-let areaCircle = Math.PI * Math.pow(r, 2)
-    console.log(`No. 3
-    r : ${r}, Diameter : ${diameter}, Circumferences : ${circumferences}, Area of Circle : ${areaCircle}`)
+// No. 2 Perimeter of Rectangle
+let perimeterRectangle = (length, breadth) => {
+    return 2 * (length + breadth);
+}
 
-// No. 4
-let angleA = 90
-let angleB = 30
-let angleC = 180 - (angleA + angleB)
-    console.log(`No. 4
-    Angle A : ${angleA}, Angle B : ${angleB} then, Angle C : ${angleC}`)
+// No. 3 Circumferences or Perimeter of Circle & Area of Circle
+// a. Circumferences
+let circumferences = (r) => {
+    return Math.PI * r;
+}
 
-// No. 5 (Skip)
+// b. Area of Circle
+let areaCircle = (r) => {
+    return Math.PI * Math.pow(r, 2);
+}
 
-// No. 6
-var total = 400
+// No. 4 Find the Third Angle of Triangle
+let thirdAngle = (firstAngle, secondAngle) => {
+    return thirdAngle = 180 - firstAngle - secondAngle;
+}
 
-var year = Math.floor(total / 365)
-var left = total % 365
+// No. 5 Different of Two Dates
+let daysDiff = (date1, date2) => {
+    let timediff = date1 - date2;
+    let result = Math.ceil(timediff / (1000 * 60 * 60 * 24))
+    return result;
+}
 
-var month = Math.floor(left / 30)
-var days = left % 30
+// No. 6 Counting year, month, days
+let countDays = (totalDays) => {
+    let year = Math.floor(totalDays / 365)
+    let daysLeft = totalDays % 365
+    let month = Math.floor(daysLeft / 30)
+    let days = daysLeft % 30
+    return `${year} year, ${month} month, ${days} days`
+}
 
-var result = `No. 6
-    ${year} year, ${month} month, ${days} days`
-    console.log(result)
+module.exports = {
+    areaRectangle, 
+    perimeterRectangle,
+    circumferences,
+    areaCircle,
+    thirdAngle,
+    daysDiff,
+    countDays
+}
